@@ -8,14 +8,18 @@ class Data_handler:
         self.path = None
 
     def file_handler_json(self, path):
-        # Handel the file resource data
+        # Handel the file resource data JSON
         # read the file
         self.path = path
-        file_data = pd.read_json(path, orient="index")
+        file_data = pd.read_json(self.path, orient="index")
         return file_data
 
-    def sql_handler(self):
-        pass
+    def file_handler_csv(self, path):
+        # Handel the file resource data CSV
+        # read the file
+        self.path = path
+        file_data = pd.read_csv(self.path, encoding="ISO-8859-1")
+        return file_data
 
     class Mongo_handler:
 
