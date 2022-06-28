@@ -111,7 +111,7 @@ def writeTo_csv():
  
 
 
-#Call the function to generate fake records and store into a json file
+#Call the function to generate fake records and store into a CSV file
 writeTo_csv()
 
 
