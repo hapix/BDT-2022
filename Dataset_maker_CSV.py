@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 """
 ## Install and load packages
 """
@@ -116,7 +118,7 @@ def writeTo_csv():
  
 
 
-#Call the function to generate fake records and store into a CSV file
+# Call the function to generate fake records and store into a CSV file
 writeTo_csv()
 
 
