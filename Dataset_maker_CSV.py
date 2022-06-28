@@ -44,14 +44,23 @@ def writeTo_csv():
         if gender=="O":
             first_name =  faker.first_name_nonbinary()
         
-        # Firstname
+        # Surname
         last_name = faker.last_name()
+        
+        # Email
+        email = unidecode.unidecode("{}.{}@{}".format(first_name, last_name, faker.free_email_domain()).lower()
         
         # Number of children
         child = np.random.choice([0,1,2,3,4,5,6,7,8,9,10], p=[0.25, 0.2, 0.2, 0.15, 0.07, 0.05, 0.03, 0.02, 0.015, 0.01, 0.005 ])
         
         # Age
         age = faker.pyint(min_value=18, max_value=80)
+        
+        # Level of education
+        education = np.random.choice(["No", "Elementary", "Graduated"]) 
+                
+        # Urban calssification                           
+        urb_class = np.random.choice(["city", "town and suburb"," rural area"])                            
         
         # Work status
         if age > 50:
@@ -69,7 +78,19 @@ def writeTo_csv():
         if work_status == 'retired':
             #income = faker.pyint(min_value=13000, max_value= 200000)  # ES
             income = faker.pyint(min_value=6800, max_value= 200000)   # ita 
+         
+        # Marital status
+        marital_status = np.random.choice( ["single", "married", "partnership", "widowed"])                          
         
+        # Location according to faker localization                            
+        location = faker.city()
+        
+        # Ownership                            
+        ownership =  np.random.choice([ "owner", "rent"]) 
+        
+        # Household
+        household =  np.random.choice([ "single", "multi"])                            
+                                    
         # Expenditure
         rate = np.random.uniform(0,0.8)
         exp = round(income * rate)
@@ -79,34 +100,18 @@ def writeTo_csv():
         writer.writerow({"ID": seed, 
                          "Firstname": first_name, 
                          "Surname": last_name,
-                         
-                         # Email address 
-                         "Email": unidecode.unidecode("{}.{}@{}".format(first_name, last_name, faker.free_email_domain()).lower()),
-                         
+                         "Email":email,
                          "Age": age ,  
                          "Sex": gender, 
-                         
-                         # Level of education
-                         "Education": np.random.choice(["No", "Elementary", "Graduated"]),
-                         # Urban classification
-                         "Urban classification":  np.random.choice(["city", "town and suburb"," rural area"]),
-                         
+                         "Education":education,                      
+                         "Urban classification":urb_class,                         
                          '#children': child, 
                          "Working status": work_status,
-                         'Annual income': income, 
-                         
-                         # Marital status
-                         'Marital status': np.random.choice( ["single", "married", "partnership", "widowed"]),
-                         
-                         # Location according to faker localization
-                         "Location": faker.city(), 
-                         
-                         # Ownership
-                         "Ownership":  np.random.choice([ "owner", "rent"]), 
-                         
-                         # Hosehold
-                         "Household": np.random.choice([ "single", "multi"]),
-                         
+                         'Annual income': income,       
+                         'Marital status': marital_status,
+                         "Location": location, 
+                         "Ownership": ownership,
+                         "Household": household,
                          "Expenditure":exp})
  
 
