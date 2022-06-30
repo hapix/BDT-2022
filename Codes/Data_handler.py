@@ -18,7 +18,10 @@ class Data_handler:
         # Handel the file resource data CSV
         # read the file
         self.path = path
-        file_data = pd.read_csv(self.path, encoding="ISO-8859-1")
+        try:
+            file_data = pd.read_csv(self.path)
+        except:
+            file_data = pd.read_csv(self.path, encoding="ISO-8859-1")
         return file_data
 
     class Mongo_handler:
@@ -41,22 +44,29 @@ class Data_handler:
                 "-3y5iws-shard-0&authSource=admin&retryWrites=true&w=majority")
             db = client.bdt_database
             collection = db.demog_data
+
             print("connection to the DB has been established: " + str(collection))
-            return collection
+            return db, collection
 
         def insert_data(self, collection, file_data):
             # This method use for insert the arrived data to the MongoDB
-            try:
-                self.collection = collection
-                collection.insert_many(file_data)
-                print("Data inserted into database")
-            except:
-                print("Data insertion had problem")
+            file_data1 = file_data.to_dict("records")
+            # try:
+            self.collection = collection
+            self.collection.insert_many(file_data1)
+            print("Data inserted into database")
+            # except:
+            #     print("Data insertion had problem")
 
         def find_data(self, collection):
             self.collection = collection
             fetched_data = collection.find()
             return fetched_data
+
+        @staticmethod
+        def create_collection(collection_name, database_name):
+            new_collection = database_name[collection_name]
+            return new_collection
 
         def model_prepared_mongo(self, mongo_finds):
             # New processes can be added to this method based on the structure of the data
@@ -67,3 +77,8 @@ class Data_handler:
             data = pd.DataFrame(list_cur)
             data = data.drop("_id", axis=1)
             return data
+
+        @staticmethod
+        def collection_names(db):
+            return db.list_collection_names()
+
