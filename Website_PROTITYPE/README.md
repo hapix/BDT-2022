@@ -30,3 +30,4 @@ im = Image.open("./IMG/Save_model_2.png")
 #show image
 im.show()
 ```
+![yo](./IMG/Save_model_1.png)
