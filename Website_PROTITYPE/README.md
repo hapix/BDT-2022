@@ -8,6 +8,7 @@ im = Image.open("./IMG/LOGO.png")
 #show image
 im.show()
 ```
+![yo](./IMG/LOGO.png)
 
 Lately,  we focused on developing a web interface that aims to make the user's interaction as simple and efficient as possible. We think that our prototype could improve the overall understanding of the design. We decided to display some focal points of the system we implemented, namely the steps in which the user has to load the datasets and the final step in which it can save the model fitted to share it to future users (also providing further information that allows to improve user understanding).
 
