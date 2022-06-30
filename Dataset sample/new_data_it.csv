@@ -1,0 +1,6 @@
+ID,Firstname,Surname,Email,Age,Sex,Education,Urban classification,n_children,Working status,Annual income,Marital status,Location,Ownership,Household
+1,Silvestro,Tonisto,silvestro.tonisto@virgilio.it,20,M,Graduated, rural area,0,student,5825,widowed,Casteldidone,rent,multi
+2,Antonella,Ferrucci,antonella.ferrucci@tele2.it,42,F,Elementary,city,0,student,4871,single,Godega Di Sant'Urbano,rent,multi
+3,Torquato,Grifeo,torquato.grifeo@hotmail.it,36,O,No, rural area,1,working,76249,married,Regnana,owner,single
+4,Luca,Malaparte,luca.malaparte@tim.it,26,O,No,city,1,student,568,partnership,Castel Di Decima,owner,single
+5,Sophia,Boiardo,sophia.boiardo@fastwebnet.it,68,F,Elementary, rural area,0,retired,71238,married,Cimolais,rent,multi
