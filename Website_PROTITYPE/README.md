@@ -8,11 +8,11 @@ We focused on developing a web interface that aims to make the user's interactio
 
 ![yo](./IMG/Load_Datasets.png)
 
-** SAVE MODEL **
+**SAVE MODEL**
 We created a web page prototype by showing how the user will add information about the different datasets used to train the model.
 
-** Dataset 1 ** 
+**Dataset 1** 
 ![yo](./IMG/Save_model_1.png)
 
-** Dataset 1 ** 
+**Dataset 1** 
 ![yo](./IMG/Save_model_2.png)
