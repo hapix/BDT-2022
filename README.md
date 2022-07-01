@@ -16,7 +16,7 @@ In this project the fiollowing
 
 ## Logical Pipeline
 Logical pipeline for this project shown in the below chart. In this pipeline we have two main paths based on the given task by the user. First ath which is followed by the blue path is for making a new model. And the green path(!) is for using a made model for estimation.
-![pipeline](./Charts/pipeline.png)
+![pipeline](./Charts/final_pipeline.png)
 
 **How it works?**
 
