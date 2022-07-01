@@ -60,8 +60,9 @@ class Model_maker:
         use_less_columns = new_list + string_feature_list
 
         # If the method does not have the model as input (it means that we want to make a new model)
-        # will satisfy this condition and will go through it
+        # will satisfy this condition and will go through it.
         if loaded_p_model is None:
+
             # Make the dictionary for saving the transform structure (Using StringIndexer)
             for str_column in string_feature_list:
                 string_indexer_dic["%s_index" % str_column] = StringIndexer(inputCol=str_column,
@@ -74,6 +75,7 @@ class Model_maker:
             for str_column_next in string_feature_list:
                 string_ohc_dic["%s_ohc" % str_column_next] = OneHotEncoder(inputCol=str_column_next + "_index",
                                                                            outputCol=str_column_next + "_ohc")
+
             # Convert "one hot coding" dic to list cause the pipeline accept the list.
             indexed_ohc_list: list[OneHotEncoder] = [string_ohc_dic[indexer_item] for indexer_item in string_ohc_dic]
 

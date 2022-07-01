@@ -11,6 +11,7 @@ class Data_ingestion:
 
     def rmv_sensitive(self, data):
         self.data = data
+
         # will delete the useless columns from data
         data1 = self.data.drop(['id', 'name', 'email', 'address',
                                 'phone', 'location'], axis=1)
@@ -42,11 +43,13 @@ class Data_ingestion:
         new_file_format = path.split(".")[-1]
         if new_file_format == "csv":
             print("File type is CSV [Using CSV module to handle the data]")
+
             # Call the file handler from the data handler class to handle the data
             new_file_data = data_handler.file_handler_csv(self.path)
             new_ingested_data = self.rmv_sensitive_csv(data=new_file_data)
         elif new_file_format == "json":
             print("File type is JSON [Using JSON module to handle the data]")
+
             # Call the file handler from the data handler class to handle the data
             new_file_data = data_handler.file_handler_json(self.path)
             new_ingested_data = self.rmv_sensitive(data=new_file_data)

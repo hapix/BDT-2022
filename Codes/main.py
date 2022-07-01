@@ -30,12 +30,14 @@ if __name__ == '__main__':
             path = input()
             print("Enter the path for saving the model and pipeline")
             model_path = input()
+
             # Will handle the input data and also ingest it
             ingested_data = data_ingestion.nd_integrated_ingestion(path=path, data_handler=data_handler)
 
             print("Choose a name for the model: ")
             collection_name = input()
-            # check if ther is a collection with the same name. Will ask to choose another name for collection
+
+            # check if there is a collection with the same name. Will ask to choose another name for collection
             existence_collections = data_handler.Mongo_handler().collection_names(db)
             while collection_name in existence_collections:
                 print("The name is existed. Please choose a new name:")
@@ -45,11 +47,14 @@ if __name__ == '__main__':
                                                                             database_name=db)
             # will insert the ingested data into the database
             data_handler.Mongo_handler().insert_data(collection=new_collection, file_data=ingested_data)
+
             #  Spark initialization
             (spark, sc) = model_maker.spark_init()
+
             # make a model with new data and return the refined data, pipeline model and the model which made by
             # the new data [all the transformation in spark will happen here]
             (pipeline_model, ml_model, refine_data) = model_maker.set_model(data=ingested_data, spark=spark)
+
             # save the both pipeline and ML model for next usage.
             model_maker.save_p_model(p_model=pipeline_model, p_model_path=model_path + "\\p_models\\" + collection_name)
             model_maker.save_ml_model(ml_model=ml_model, ml_model_path=model_path + "\\ml_models\\" + collection_name)
@@ -59,12 +64,14 @@ if __name__ == '__main__':
 
             # New data will ingest in the same way that the program ingest the input data
             new_ingested_data = data_ingestion.nd_integrated_ingestion(path=new_data_path, data_handler=data_handler)
+
             # Here we just get the refined data. The new ingested data will go through the set_model method in the
             # second section and just return the refined data. It will use the made pipeline and Ml model which was
             # created in the previous section
             (new_pipeline_model, new_ml_model, new_refine_data) = model_maker.set_model(data=new_ingested_data,
                                                                                         spark=spark,
                                                                                         loaded_p_model=pipeline_model)
+
             # will estimate the expenditure based on the new refined data
             predicted_df = model_maker.prediction_module(refine_data=new_refine_data, ml_model=ml_model)
 
@@ -80,13 +87,12 @@ if __name__ == '__main__':
             print("Enter the path for load models and pipelines")
             model_path = input()
             print("Choose one of the models:")
+
             # Will show the all the name of the collections which are n fact names of the models
             existence_collections = data_handler.Mongo_handler().collection_names(db)
             for item_num, item_model in enumerate(existence_collections):
                 print(f"[{item_num + 1}] {item_model}")
             selected_model = int(input())
-
-            # bargardoondane forate column ha ba tavajoh be model
             selected_model_name = existence_collections[selected_model - 1]
             print(f"Model \'" + selected_model_name + "\' has been selected")
             # Models will be loaded
@@ -94,6 +100,7 @@ if __name__ == '__main__':
             loaded_ml_model = model_maker.load_ml_model(model_path + "\\ml_models\\" + selected_model_name)
             print("Enter the path of the new data to Estimate:\n ")
             new_data_path = input()
+
             # Here we just get the refined data. The new ingested data will go through the set_model method in the
             # second section and just return the refined data. It will use the made pipeline and Ml model which was
             # created in the previous section
@@ -101,8 +108,10 @@ if __name__ == '__main__':
             (new_pipeline_model, new_ml_model, new_refine_data) = model_maker.set_model(data=new_ingested_data,
                                                                                         spark=spark,
                                                                                         loaded_p_model=loaded_p_model)
+
             # will estimate the expenditure based on the new refined data
             predicted_df = model_maker.prediction_module(refine_data=new_refine_data, ml_model=loaded_ml_model)
+
             # use the api to change the currency
             for curr in predicted_df["prediction"]:
                 print(curr, API_handler().convert("EUR", "GBP", curr))

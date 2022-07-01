@@ -21,6 +21,7 @@ class Data_handler:
 
     # Handling the CSV format file
     def file_handler_csv(self, path):
+
         # Handel the file resource data CSV
         # read the file
         self.path = path
@@ -77,6 +78,7 @@ class Data_handler:
         # Retrieve the all data fo collection
         def find_data(self, collection):
             self.collection = collection
+
             # there is no condition for finding the data on query because we want all the data
             fetched_data = collection.find()
             return fetched_data
