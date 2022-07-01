@@ -1,7 +1,7 @@
 import json
 import pandas as pd
 import pymongo
-
+import datetime
 
 class Data_handler:
     def __init__(self):
@@ -45,15 +45,18 @@ class Data_handler:
             db = client.bdt_database
             collection = db.demog_data
 
-            print("connection to the DB has been established: " + str(collection))
+            #print("connection to the DB has been established: " + str(collection))
             return db, collection
 
         def insert_data(self, collection, file_data):
             # This method use for insert the arrived data to the MongoDB
+            utc_timestamp = datetime.datetime.utcnow()
             file_data1 = file_data.to_dict("records")
             # try:
             self.collection = collection
+            self.collection.create_index("insert_date", expireAfterSeconds=13140*60)
             self.collection.insert_many(file_data1)
+            self.collection.update_many({}, {"$set": {"insert_date": utc_timestamp}}, upsert=False)
             print("Data inserted into database")
             # except:
             #     print("Data insertion had problem")
@@ -75,7 +78,7 @@ class Data_handler:
             self.mongo_finds = mongo_finds
             list_cur = list(mongo_finds)
             data = pd.DataFrame(list_cur)
-            data = data.drop("_id", axis=1)
+            data = data.drop(["_id", "insert_date"], axis=1)
             return data
 
         @staticmethod

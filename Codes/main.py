@@ -1,9 +1,8 @@
 # Big data project | Hamid, Elisa, Elisa
-import pyspark
 from Data_handler import Data_handler
 from Model_maker import Model_maker
-from API_handler import API_handler
 from Data_ingestion import Data_ingestion
+from API_handler import API_handler
 import art
 
 if __name__ == '__main__':
@@ -20,7 +19,7 @@ if __name__ == '__main__':
 
     # Banner
     art.tprint('Techno  Pred', "tarty1")
-    print("Welcome to Techno Pred. Estimate your yearly expenditure o thecnology!")
+    print("Welcome to Techno Pred. Estimate your yearly expenditure o technology!")
     (db, collection) = data_handler.Mongo_handler().connect_db(db_user_name=db_user_name, db_pass=db_pass)
 
     while True:
@@ -34,21 +33,7 @@ if __name__ == '__main__':
             print("Enter the path of the data:")
             # path = input()
             path = "C:\\Users\\hamid\\Downloads\\my_fake_data_it.csv"
-            file_format = path.split(".")[-1]
-            if file_format == "csv":
-                print("File type is CSV [Using CSV module to handle the data]")
-                file_data = data_handler.file_handler_csv(path)
-                ingested_data = data_ingestion.rmv_sensitive_csv(data=file_data)
-                # print(type(ingested_data))
-
-            elif file_format == "json":
-                print("File type is JSON [Using JSON module to handle the data]")
-                file_data = data_handler.file_handler_json(path)
-                ingested_data = data_ingestion.rmv_sensitive(data=file_data)
-            else:
-                print("File format invalid")
-                break
-            # Data ingestion
+            ingested_data = data_ingestion.nd_integrated_ingestion(path=path, data_handler=data_handler)
 
             print("Choose a name for the model: ")
             collection_name = input()
@@ -69,23 +54,13 @@ if __name__ == '__main__':
             print("Enter the path of the new data to Estimate:\n ")
             # new_data_path = input()
             new_data_path = "C:\\Users\\hamid\\Downloads\\new_data_it.csv"
-            new_file_format = new_data_path.split(".")[-1]
-            if new_file_format == "csv":
-                print("File type is CSV [Using CSV module to handle the data]")
-                new_file_data = data_handler.file_handler_csv(new_data_path)
-                ingested_data = data_ingestion.nd_rmv_sensitive_csv(data=new_file_data)
-            elif new_file_format == "json":
-                print("File type is JSON [Using JSON module to handle the data]")
-                new_file_data = data_handler.file_handler_json(new_data_path)
-                ingested_data = data_ingestion.nd_rmv_sensitive(data=new_file_data)
-            else:
-                print("File format invalid")
-                break
-
-            (new_pipeline_model, new_ml_model, new_refine_data) = model_maker.set_model(data=ingested_data,
+            new_ingested_data = data_ingestion.nd_integrated_ingestion(path=new_data_path, data_handler=data_handler)
+            (new_pipeline_model, new_ml_model, new_refine_data) = model_maker.set_model(data=new_ingested_data,
                                                                                         spark=spark,
                                                                                         loaded_p_model=pipeline_model)
-            model_maker.prediction_module(refine_data=new_refine_data, ml_model=ml_model)
+            predicted_df = model_maker.prediction_module(refine_data=new_refine_data, ml_model=ml_model)
+            for curr in predicted_df["prediction"]:
+                print(curr, API_handler().convert("EUR", "GBP", curr))
 
         elif first_step == "2":
             (spark, sc) = model_maker.spark_init()
@@ -103,23 +78,13 @@ if __name__ == '__main__':
             print("Enter the path of the new data to Estimate:\n ")
             # new_data_path = input()
             new_data_path = "C:\\Users\\hamid\\Downloads\\new_data_it.csv"
-            new_file_format = new_data_path.split(".")[-1]
-            if new_file_format == "csv":
-                print("File type is CSV [Using CSV module to handle the data]")
-                new_file_data = data_handler.file_handler_csv(new_data_path)
-                new_ingested_data = data_ingestion.nd_rmv_sensitive_csv(data=new_file_data)
-            elif new_file_format == "json":
-                print("File type is JSON [Using JSON module to handle the data]")
-                new_file_data = data_handler.file_handler_json(new_data_path)
-                new_ingested_data = data_ingestion.nd_rmv_sensitive(data=new_file_data)
-            else:
-                print("File format invalid")
-                break
-
+            new_ingested_data = data_ingestion.nd_integrated_ingestion(path=new_data_path,data_handler=data_handler)
             (new_pipeline_model, new_ml_model, new_refine_data) = model_maker.set_model(data=new_ingested_data, spark=spark,
                                                                                         loaded_p_model=loaded_p_model)
-            new_refine_data.show()
-            model_maker.prediction_module(refine_data=new_refine_data, ml_model=loaded_ml_model)
+            predicted_df = model_maker.prediction_module(refine_data=new_refine_data, ml_model=loaded_ml_model)
+
+            for curr in predicted_df["prediction"]:
+                print(curr, API_handler().convert("EUR", "GBP", curr))
 
         elif first_step == "3":
             break

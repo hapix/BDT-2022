@@ -141,6 +141,8 @@ class Model_maker:
     def prediction_module(refine_data, ml_model):
         ml_prediction = ml_model.transform(refine_data)
         ml_prediction.show()
+        predicted_df = ml_prediction.toPandas()
+        return predicted_df
 
     @staticmethod
     def load_p_model(r_p_model_path):
