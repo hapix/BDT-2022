@@ -4,7 +4,12 @@ The aim of this project is to design and implement a big data system for estimat
 ## Requierments
 In this project the fiollowing
 - Python version>=2.7
-- MongoDB
+  - PySpark
+  - PyMongo
+  - requests
+  - Pandas
+  - findspark
+- MongoDB Alas
 - spark-3.3.0_hadoop2
 - Stable Internet connection!
 
@@ -12,7 +17,9 @@ In this project the fiollowing
 ## Logical Pipeline
 Logical pipeline for this project shown in the below chart. In this pipeline we have two main paths based on the given task by the user. First ath which is followed by the blue path is for making a new model. And the green path(!) is for using a made model for estimation.
 ![pipeline](./Charts/pipeline.png)
+
 **How it works?**
+
 In the first path (making a new model), after importing the data sets to the pipeline, data will be ingested by the ingestion module. Ingestion module will remove unnecessary variables from the data set based on the user and system constraints (e.g. anonymisation), and in the next step the data will be stored in our database. Aslo to make the system faster we pass one copy of the ingested data directly to the transforming section. The difference for the second path is that we don't need to save the information in our database. To continue the first path we path the data to the transforming part to prepare the data for machine learning in spark. In the next steps the model will be created and the new data can be estimated by the model that had been made in the previous step. Moreover, an API connection is provided that enables the user to change the currency based on currency rate exchange. At the end, the outcome can be shown on the interface.
 As it can be seen for the second path we do not save the data in the database, the pipeline just ingest the data and pass the ingested data to the transforming and estimation part. The estimation part will load the chosen model and estimate the expenditures.
 In the table below the summary of the block's activation and functionality can be seen.
