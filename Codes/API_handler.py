@@ -2,6 +2,8 @@ import requests
 
 
 class API_handler:
+    """" This class will handle the connection with free api """
+
     def __init__(self, url = 'https://api.exchangerate-api.com/v4/latest/EUR'):
         self.data = requests.get(url).json()
         self.currencies = self.data['rates']
