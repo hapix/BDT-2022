@@ -8,5 +8,6 @@ spark-3.3.0 | hadoop2
 
 ## Introduction
 
-
+## Logical Pipeline
+![you](./Charts/pipeline.png)
 ## Requierments
