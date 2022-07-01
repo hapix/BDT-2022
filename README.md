@@ -32,7 +32,7 @@ As it can be seen for the second path we do not save the data in the database, t
 ## How to Run?
 Simply run the main.y by python compiler
 >python main.py
-![Intro](./Charts/intro.png)
+![Intro](./Charts/Intro.png)
 
 
 
