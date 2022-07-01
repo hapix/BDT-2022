@@ -1,3 +1,5 @@
+<-- SET MAIN FEATURES OF THE WEBSITE LAYOUT >
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -69,6 +71,8 @@
         <link href="sidebars.css" rel="stylesheet">
     </head>
     <body>
+ 
+<!--DOWNLOAD IMAGES AND SYMB0LS-->
       
 <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
     <symbol id="bootstrap" viewBox="0 0 118 94">
@@ -130,39 +134,64 @@
 </svg>
 
 <main class="d-flex flex-nowrap">
-    
+
+  <!-- LOAD LOGO IMAGE -->
+  
 <div class="d-flex flex-column flex-shrink-0 p-3 bg-light" style="width: 280px;">
     <a href="./Prototype_Load_Datasets.html" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
       
-      <img src="./IMG/LOGO.png" width="240" height="90">
+      <img src="./IMG/LOGO.png" width="240" height="90">   
       
     </a>
     <hr>
+  
+        
+<!-- SET INDEX INFORMATION: 
+    - HOME
+    - LOAD DATASETS
+    - TRAIN MODEL
+    - SAVE THE MODEL
+-->  
     <ul class="nav nav-pills flex-column mb-auto">
       <li class="nav-item">
+        
+        <!-- HOME PAGE BOTTON -->
+
         <a href="#" class="nav-link link-dark">
           <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#home"/></svg>
           Home
         </a>
       </li>
+      
+      <!-- LOAD DATASET WEB PAGE BOTTON -->
+      
       <li>
         <a href="./Prototype_Load_Datasets.html" class="nav-link link-dark">
           <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#table"/></svg>
           Load Datasets
         </a>
       </li>
+      
+      <!-- SELECT OTHER DATASETS WEB PAGE BOTTON -->
+      
       <li>
         <a href="#" class="nav-link link-dark">
           <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#grid"/></svg>
           Select other Datasets
         </a>
       </li>
+      
+      <!-- TRAIN MODEL WEB PAGE BOTTON -->
+      
       <li>
         <a href="#" class="nav-link link-dark">
           <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#speedometer2"/></svg>
           Train Model
         </a>
       </li>
+      
+      <!-- SAVE THE MODEL WEB PAGE BOTTON -->
+      
       <li>
         <a href="./Prototype_Save_model.html" class="nav-link active" aria-current="page">
           <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#people-circle"/></svg>
@@ -171,6 +200,9 @@
       </li>
     </ul>
     <hr>
+  
+  <!-- USER -->
+  
     <div class="dropdown">
       <a href="#" class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
         <img src="https://github.com/redscreen.png" alt="" width="32" height="32" class="rounded-circle me-2">
@@ -187,11 +219,17 @@
   </div>
 
   <article class="my-3" id="sizing">
-
+    
+<!-- ----------------------------------------------------------------------------------------------------------------------------------- -->
+   
+<!-- SAVE MODEL section -->
+    
     <div class="bd-heading fixed-xl-top align-self-start mt-5 mb-3 mt-xl-0 mb-xl-2" >
       <h1>Save your model</h1>
       <a class="d-flex align-items-center" href="../forms/form-control/#sizing"></a>
     </div>
+      
+    <!-- Give the user instructions -->
 
     <article class="my-3" id="validation">
         <div class="bd-heading sticky-xl-top align-self-start mt-5 mb-3 mt-xl-0 mb-xl-2">
@@ -202,6 +240,8 @@
             <p class="mb-0">To facilitate usage and comprehension provide further information about the datasets used.</p>
           </div></div>
         </div>
+          
+      <!-- Set the model cration date -->
 
         <div>
           <div class="bd-example-snippet bd-code-snippet"><div class="bd-example">
@@ -216,6 +256,8 @@
 
             <div class="bd-example-snippet bd-code-snippet"><div class="bd-example">
                 <nav>
+                  
+        <!-- Select dataset, to give the system information about it -->
 
                   <div class="nav nav-tabs mb-3" id="nav-tab" role="tablist">
                     <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Dataset #1</button>
@@ -223,6 +265,8 @@
                     <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Dataset #3</button>
                   </div>
                 </nav>
+              
+              <!-- Insert DATASET CREATION DATE >
 
                 <div class="tab-content" id="nav-tabContent">
                   <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
@@ -233,7 +277,9 @@
                           Looks good!
                         </div>
                       </div>
-          
+
+               <!-- Insert CITIES >
+
                       <div class="col-md-6">
                       <label for="validationServer03" class="form-label">City</label>
                       <input type="text" class="form-control is-invalid" id="validationServer03" required>
@@ -241,6 +287,8 @@
                         Please provide at least a valid city.
                       </div>
                     </div>
+
+                <!-- Insert COUNTRY >
 
                     <div class="col-md-3">
                       <label for="validationServer04" class="form-label">Country</label>
@@ -253,6 +301,11 @@
                       </div>
                     </div>
                   </div>
+
+        <--! Dataset 2 >
+
+               <--! Insert Dataset creation Date >
+
                 <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
                 <div class="col-md-4">
                     <label for="validationServer02" class="form-label">Dataset creation Date</label>
@@ -261,7 +314,9 @@
                         Please provide a valid year.
                     </div>
                     </div>
-        
+
+               <!-- Insert CITIES >
+
                     <div class="col-md-6">
                     <label for="validationServer03" class="form-label">City</label>
                     <input type="text" class="form-control is-invalid" id="validationServer03" required>
@@ -269,6 +324,9 @@
                     Please provide at least a valid city.
                     </div>
                 </div>
+
+                <!-- Insert COUNTRY >
+
                 <div class="col-md-3">
                     <label for="validationServer04" class="form-label">Country</label>
                     <select class="form-select is-invalid" id="validationServer04" required>
@@ -281,6 +339,9 @@
                 </div>
                 </div>
 
+        <--! Dataset 3 >
+
+                <--! Insert Dataset creation Date >
 
                 <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
                 <div class="col-md-4">
@@ -291,6 +352,8 @@
                     </div>
                     </div>
 
+               <!-- Insert CITIES >
+
                     <div class="col-md-6">
                     <label for="validationServer03" class="form-label">City</label>
                     <input type="text" class="form-control is-invalid" id="validationServer03" required>
@@ -298,6 +361,9 @@
                     Please provide at least a valid city.
                     </div>
                 </div>
+
+                <!-- Insert COUNTRY >
+
                 <div class="col-md-3">
                     <label for="validationServer04" class="form-label">Country</label>
                     <select class="form-select is-invalid" id="validationServer04" required>
@@ -311,6 +377,8 @@
             </div>
             </div>
             </div></div>
+
+<!-- AGREE TO TERMS AND CONDITIONS >
 
           <div class="col-12">
             <hr>
