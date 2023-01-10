@@ -9,7 +9,7 @@ In this project the fiollowing
   - requests
   - Pandas
   - findspark
-- MongoDB Alas
+- MongoDB Atlas
 - spark-3.3.0_hadoop2
 - Stable Internet connection!
 
